@@ -90,7 +90,7 @@ $ dpdc-cli get-customer-info -c 1234567890
 accountId            1234567890
 customerName         MD. JOHN DOE
 customerClass        Residential
-mobileNumber         01712345678
+mobileNumber         01234567890
 ```
 
 ## 🛠️ Development
