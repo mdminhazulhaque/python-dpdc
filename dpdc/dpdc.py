@@ -144,8 +144,11 @@ class DpdcPrepaid:
         data = []
         if 'data' in response and 'postBalanceDetails' in response['data']:
             balance_details = response['data']['postBalanceDetails']
+            # Filter to show only specific fields for balance
+            allowed_fields = ['accountId', 'accountType', 'balanceRemaining', 'connectionStatus']
             for key, value in balance_details.items():
-                data.append([key, str(value) if value is not None else ''])
+                if key in allowed_fields:
+                    data.append([key, str(value) if value is not None else ''])
 
         return data
 
@@ -159,4 +162,33 @@ class DpdcPrepaid:
         Returns:
             List[List[str]]: A list of [key, value] pairs containing customer information
         """
-        return self.get_balance()
+        query = f"""query{{
+            postBalanceDetails(input: {{
+                customerNumber: "{self.customer_number}",
+                tenantCode: "{self.TENANT_CODE}"
+            }}) {{
+                accountId
+                customerName
+                customerClass
+                mobileNumber
+                emailId
+                accountType
+                balanceRemaining
+                connectionStatus
+                customerType
+                minRecharge
+            }}
+        }}"""
+
+        response = self._make_graphql_request(query)
+
+        data = []
+        if 'data' in response and 'postBalanceDetails' in response['data']:
+            balance_details = response['data']['postBalanceDetails']
+            # Filter to show only specific fields for customer info
+            allowed_fields = ['accountId', 'customerName', 'customerClass', 'mobileNumber']
+            for key, value in balance_details.items():
+                if key in allowed_fields:
+                    data.append([key, str(value) if value is not None else ''])
+
+        return data

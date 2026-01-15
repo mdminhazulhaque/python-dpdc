@@ -72,15 +72,9 @@ $ dpdc-cli get-balance -c 1234567890
 **Sample Output:**
 ```
 accountId            1234567890
-customerName         MD. JOHN DOE
-customerClass        Residential
-mobileNumber         01712345678
-emailId              customer@example.com
-accountType          Prepaid
+accountType          Pre Paid
 balanceRemaining     1250.50
 connectionStatus     Active
-customerType         Domestic
-minRecharge          100
 ```
 
 ### 👤 Get Customer Information
@@ -97,12 +91,6 @@ accountId            1234567890
 customerName         MD. JOHN DOE
 customerClass        Residential
 mobileNumber         01712345678
-emailId              customer@example.com
-accountType          Prepaid
-balanceRemaining     1250.50
-connectionStatus     Active
-customerType         Domestic
-minRecharge          100
 ```
 
 ## 🛠️ Development
